@@ -15,7 +15,9 @@ from ase.visualize import view
 from ase.io import read,write
 from ase.constraints import StrainFilter
 from ase.io import Trajectory
+import os 
 
+work_dir = os.path.dirname(os.path.realpath(__file__))
 
 # graphene_defected_2cell = read(filename='POSCARtwee')
 # graphene_defect = read(filename='POSCARenkelecarbo')
@@ -24,7 +26,7 @@ from ase.io import Trajectory
 #for exc 2.3:
 # graphene_three_musketeers = read(filename='POSCARdriemusketiers')
 # grapheen_defectemusketiers = read(filename='POSCARdriemusketiers_metdefect')
-grapheen = read(filename='POSCAR')
+grapheen = read(filename=f'{work_dir}/POSCAR')
 # grapheen_defect =  read(filename= 'POSCARrechthoekdefect')
 
 
@@ -42,8 +44,8 @@ def geo_optimise(structure,saveto):
     opt.run(fmax=0.01) #convergence criteria for geometry optimisation. Test how this value affects your results
 
     #Output optimised structure file
-    write('TESTESTESTESTESTEST.xyz', structure)  #xyz format
-    write(f'{saveto}', structure) #POSCAR format 
+    write(f'{work_dir}/outputpiemol.xyz', structure)  #xyz format
+    write(f'{work_dir}/CONTCAR_piemol', structure) #POSCAR format  
     return structure.get_potential_energy()
 
 geo_optimise(grapheen,'Lalalalalalalallalalalalalla')
