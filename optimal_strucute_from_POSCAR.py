@@ -20,6 +20,7 @@ from ase.visualize import view
 import os
 from gas import create_gas
 from get_position import get_position
+from convergence_tests import converge_kpoints, converge_ecut
 
 work_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -27,10 +28,22 @@ work_dir = os.path.dirname(os.path.realpath(__file__))
 #deze code kijkt ook al of de file al bestaat voordat ie m gaat runne
 #de twee namen die je nu mee moet geven slaan hem zo op
 
-def optimal_structure(naam_deeltje, type_position):
-
+def optimal_structure(naam_deeltje, type_position, functional):
+    threshold = 0.01
     strucutre = read(filename='Mxene_poscar')
-    
+
+    #hier ga ik kijken of we de k points en encuts al hebben en anders bereken je ze
+    if os.path.isfile(f'{work_dir}/convergence_{functional}') == False:
+        encuts = converge_ecut(atoms= strucutre, functional = functional,threshold= threshold )
+        k =  converge_kpoints(atoms = strucutre,functional = functional, threshold = threshold, encut=encuts)
+        lijst_values = [encuts, k]
+        with open(f'convergence_{functional}', "w") as file:
+            # Write each item in the list to a new line
+            for item in lijst_values:
+                file.write(item + "\n")
+    else:
+        with open(f'convergence_{functional}', "w") as file:
+            encuts, k = file.read().split(",")    
 
     calc = GPAW(mode=PW(400),
                 kpts=(4,4,1), #Replace with optimised energy cut off and k mesh 
