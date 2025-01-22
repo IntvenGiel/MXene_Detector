@@ -16,7 +16,7 @@ from ase.constraints import StrainFilter
 from ase.io import Trajectory
 from ase.visualize import view
 import os
-from opt_from_POSCAR import optimal_structure
+from optimal_strucute_from_POSCAR import optimal_structure
 
 #voor deze functie
 #als deeltjes

@@ -20,8 +20,12 @@ from ase.visualize import view
 import os
 from gas import create_gas
 from get_position import get_position
+
 work_dir = os.path.dirname(os.path.realpath(__file__))
 
+
+#deze code kijkt ook al of de file al bestaat voordat ie m gaat runne
+#de twee namen die je nu mee moet geven slaan hem zo op
 
 def optimal_structure(naam_deeltje, type_position):
     positie_deeltje = create_gas(naam_deeltje)
