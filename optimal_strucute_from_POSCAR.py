@@ -28,11 +28,9 @@ work_dir = os.path.dirname(os.path.realpath(__file__))
 #de twee namen die je nu mee moet geven slaan hem zo op
 
 def optimal_structure(naam_deeltje, type_position):
-    positie_deeltje = create_gas(naam_deeltje)
 
-    position , naam_positie= get_position(type_position)
     strucutre = read(filename='Mxene_poscar')
-    structure  += position
+    
 
     calc = GPAW(mode=PW(400),
                 kpts=(4,4,1), #Replace with optimised energy cut off and k mesh 
