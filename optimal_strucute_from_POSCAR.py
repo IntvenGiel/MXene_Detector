@@ -30,27 +30,34 @@ work_dir = os.path.dirname(os.path.realpath(__file__))
 
 def optimal_structure(naam_deeltje, type_position, functional):
     threshold = 0.01
-    strucutre = read(filename='Mxene_poscar')
+    structure = read(filename='Mxene_poscar')
 
     #hier ga ik kijken of we de k points en encuts al hebben en anders bereken je ze
-    if os.path.isfile(f'{work_dir}/convergence_{functional}') == False:
-        encuts = converge_ecut(atoms= strucutre, functional = functional,threshold= threshold )
-        k =  converge_kpoints(atoms = strucutre,functional = functional, threshold = threshold, encut=encuts)
-        lijst_values = [encuts, k]
-        with open(f'convergence_{functional}', "w") as file:
-            # Write each item in the list to a new line
-            for item in lijst_values:
-                file.write(item + "\n")
-    else:
-        with open(f'convergence_{functional}', "w") as file:
-            encuts, k = file.read().split(",")    
+    if os.path.isfile(f'{work_dir}/data_for_simulation/convergence_{functional}') == False:
+        encuts = converge_ecut(atoms= structure, functional = functional,threshold= threshold )
+        k =  converge_kpoints(atoms = structure,functional = functional, threshold = threshold, encut=encuts)
+        lijst_convergence = [encuts, k]
 
-    calc = GPAW(mode=PW(400),
-                kpts=(4,4,1), #Replace with optimised energy cut off and k mesh 
+        with open(f'{work_dir}/data_for_simulation/convergence/convergence_{functional}', "w") as file:
+            # Write each item in the list to a new line
+            for item in lijst_convergence:
+                file.write(str(item) + "\n")
+    else:
+        with open(f'{work_dir}/data_for_simulation/convergence/convergence_{functional}', "r") as file:
+            # Read all lines and strip newline characters
+            lijst_convergence = [line.strip() for line in file]  
+            encuts, k = lijst_convergence
+
+
+    #vanaf hiet gaan we de brekeningen doen
+    calc = GPAW(mode=PW(encuts),
+                kpts=(k,k,1), #Replace with optimised energy cut off and k mesh 
                 xc='PBE', 
                 occupations=FermiDirac(0.05), 
                 txt=f'{work_dir}/opt_{naam_deeltje}_{naam_positie}.txt')
 
+
+    #hier doen we de geometry optimilization
     if os.path.isfile(f'{work_dir}/output_{naam_deeltje}_{naam_positie}.xyz') == False:
         structure.calc=calc
         calcname = f'opt_{naam_deeltje}_{naam_positie}'
