@@ -1,13 +1,6 @@
-import numpy as np
 from gpaw import GPAW, PW, FermiDirac
-from ase import Atoms
-from ase.optimize import BFGS
-from ase.visualize import view 
 from ase.io import read,write
-# from ase.constraints import StrainFilter
-# from ase.io import Trajectory
 from matplotlib import pyplot as plt
-from numpy import cos,sin
 
 graphene = read('CONTCAR_so2-optimised-PBE')
 
@@ -21,6 +14,6 @@ def energygetter(structure):
 
 
 print(energygetter(graphene))  #Chemical potentials for gas absorption, free energy of particle
-NO2 = -18.741834830764454
-CO2 = -23.602405582927695
-SO2 = -17.39757573987345
+chempot_NO2 = -18.741834830764454
+chempot_CO2 = -23.602405582927695
+chempot_SO2 = -17.39757573987345
