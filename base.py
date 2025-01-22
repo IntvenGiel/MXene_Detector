@@ -20,13 +20,9 @@ from optimal_strucute_from_POSCAR import optimal_structure
 
 #voor deze functie
 #als deeltjes
-# 0 == Li
-#1 ==
-#2 == 
+# co2,so2, no2
 #als positie
-#1 top
-#2 hollow
-#3 bridge
+#1  2  3  4
 
 deeltje = 0
 positie = 0
