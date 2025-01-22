@@ -42,6 +42,7 @@ def optimal_structure(naam_deeltje, type_position, functional):
             # Write each item in the list to a new line
             for item in lijst_convergence:
                 file.write(str(item) + "\n")
+                
     else:
         with open(f'{work_dir}/data_for_simulation/convergence/convergence_{functional}', "r") as file:
             # Read all lines and strip newline characters
