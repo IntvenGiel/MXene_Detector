@@ -25,9 +25,9 @@ site3[2] = z_top + dist_to_mxene
 struct = structure.copy()
 struct.pbc = False
 
-# view(struct + Atom('Li', position=site0, tag=1))
-# view(struct + Atom('Li', position=site1, tag=2))
-# view(struct + Atom('Li', position=site2, tag=3))
-# view(struct + Atom('Li', position=site3, tag=4))
+view(struct + Atom('Li', position=site0, tag=1))
+view(struct + Atom('Li', position=site1, tag=2))
+view(struct + Atom('Li', position=site2, tag=3))
+view(struct + Atom('Li', position=site3, tag=4))
 
 sites = np.array([site0, site1, site2, site3])
