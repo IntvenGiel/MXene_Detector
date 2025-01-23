@@ -2,10 +2,11 @@ import numpy as np
 from ase.io import read,write
 from ase.visualize import view
 from ase import Atoms
+import os 
 
+work_dir = os.path.dirname(os.path.realpath(__file__))
 
-
-filenames = ['CONTCAR_co2-optimized-PBE', 'CONTCAR_so2-optimized-PBE', 'CONTCAR_no2-optimized-PBE']
+filenames = [f'{work_dir}/CONTCAR_co2-optimized-PBE', f'{work_dir}/CONTCAR_so2-optimized-PBE', f'{work_dir}/CONTCAR_no2-optimized-PBE']
 for filename_gas in filenames:
     gas = read(filename=filename_gas, format='vasp')
 

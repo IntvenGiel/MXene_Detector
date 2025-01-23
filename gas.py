@@ -1,7 +1,9 @@
 from ase import Atom
 from ase import Atoms
 from ase.visualize import view
+import os
 
+work_dir = os.path.dirname(os.path.realpath(__file__))
 
 def create_gas(name):
     if name.lower == 'co2':
@@ -44,8 +46,8 @@ def optimize_gas(structure, functional, filename, ecut_converged=None, k_converg
             kpts=(k_converged,k_converged,1),
             xc=functional, 
             occupations=FermiDirac(0.01), 
-            txt=filename+'.txt')
+            txt={work_dir}/filename+'.txt')
     structure.calc=calc
     opt=BFGS(structure,trajectory=(filename+'.traj'))
     opt.run(fmax=0.01)
-    write('CONTCAR_'+filename, structure)
+    write(f'{work_dir}/CONTCAR_'+filename, structure)

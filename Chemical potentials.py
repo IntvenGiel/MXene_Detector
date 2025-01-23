@@ -8,8 +8,11 @@ from ase.io import read,write
 # from ase.io import Trajectory
 from matplotlib import pyplot as plt
 from numpy import cos,sin
+import os
 
-graphene = read('CONTCAR_so2-optimised-PBE')
+work_dir = os.path.dirname(os.path.realpath(__file__))
+
+graphene = read(f'{work_dir}/CONTCAR_so2-optimised-PBE')
 
 def energygetter(structure):
     calc = GPAW(mode=PW(1000),

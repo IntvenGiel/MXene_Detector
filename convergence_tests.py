@@ -6,6 +6,9 @@ from ase.build import bulk
 from ase.lattice.hexagonal import Graphene #set up graphene using ASE
 from ase.io import Trajectory
 import numpy as np
+import os
+
+work_dir = os.path.dirname(os.path.realpath(__file__))
 
 def converge_ecut(atoms,functional, threshold):
     edif = float('inf')
