@@ -36,5 +36,3 @@ functional = 'PBE'
 site = 3
 
 main(molecule_name, mxene_name, functional, site)
-
-
