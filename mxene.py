@@ -8,7 +8,7 @@ import os
 def check_optimized_mxene(name, path, functional):
     """Checks whether an mxene has already been optimized"""
     try:
-        mxene = read(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional.upper()}')
+        mxene = read(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional}')
         return mxene
     except:
         pass
@@ -23,7 +23,7 @@ def initialize_mxene_sheet(name, path):
 
 def optimize_mxene_sheet(structure, functional, name, path):
     try:
-        calc = GPAW(path + '/mxene/calculator/' + functional.upper() + '-calculator.gpw')
+        calc = GPAW(path + '/mxene/calculator/' + functional + '-calculator.gpw')
     except:
         threshold = 0.01
         ecut_converged = converge_ecut(structure, functional, threshold)
@@ -33,13 +33,13 @@ def optimize_mxene_sheet(structure, functional, name, path):
                         kpts=(k_converged,k_converged,1),
                         xc=functional, 
                         occupations=FermiDirac(0.01), 
-                        txt= path + '/mxene/calculator/' + functional.upper() + '.txt')
+                        txt= path + '/mxene/calculator/' + functional + '.txt')
     
     structure.calc=calc
-    opt=BFGS(structure,trajectory=(path + '/mxene/trajectories/' + functional.upper() +'.traj'))
+    opt=BFGS(structure,trajectory=(path + '/mxene/trajectories/' + functional +'.traj'))
     opt.run(fmax=0.01)
-    calc.write(path + '/mxene/calculator/' + functional.upper() + '-calculator.gpw', mode='all')
-    write(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional.upper()}', structure)
+    calc.write(path + '/mxene/calculator/' + functional + '-calculator.gpw', mode='all')
+    write(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional}', structure)
 
 
 def initialize_optimized_mxene(mxene_name, functional, path):
@@ -47,4 +47,4 @@ def initialize_optimized_mxene(mxene_name, functional, path):
     if mxene_opt == None:
         sheet = initialize_mxene_sheet(mxene_name, path)
         optimize_mxene_sheet(sheet, functional, mxene_name, path)
-    return read(path + '/mxene/molecules/' + f'CONTCAR-{mxene_name}-optimized-{functional.upper()}', format='vasp')
+    return read(path + '/mxene/molecules/' + f'CONTCAR-{mxene_name}-optimized-{functional}', format='vasp')

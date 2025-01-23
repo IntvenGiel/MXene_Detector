@@ -11,7 +11,7 @@ def check_gas_exists(name, path, functional):
     """
     try:
         gas_files = os.listdir(path + '/gas/molecules')
-        filename = f'CONTCAR-{name.upper()}-optimized-{functional.upper()}'
+        filename = f'CONTCAR-{name.upper()}-optimized-{functional}'
         if filename in gas_files:
             file_path = path + '/gas/molecules/' + filename
 
@@ -57,7 +57,7 @@ def optimize_gas(structure, functional, path, gas_name):
 
     # Either reads out calculator or creates one and runs convergence tests
     try:
-        calc = GPAW(path + '/gas/calculator/' + functional.upper() + '-calculator.gpw')
+        calc = GPAW(path + '/gas/calculator/' + functional + '-calculator.gpw')
     except:
         threshold = 0.01
         ecut_converged = converge_ecut(structure, functional, threshold)
@@ -67,13 +67,13 @@ def optimize_gas(structure, functional, path, gas_name):
                 kpts=(k_converged,k_converged,1),
                 xc=functional, 
                 occupations=FermiDirac(0.01), 
-                txt= path + '/gas/calculator/' + functional.upper() + '.txt')
+                txt= path + '/gas/calculator/' + functional + '.txt')
          
     structure.calc=calc
-    opt=BFGS(structure,trajectory=(path + '/gas/trajectories/' + functional.upper() +'.traj'))
+    opt=BFGS(structure,trajectory=(path + '/gas/trajectories/' + functional +'.traj'))
     opt.run(fmax=0.01)
-    calc.write(path + '/gas/calculator/' + functional.upper() + '-calculator.gpw', mode='all')
-    write(path + '/gas/molecules/' + f'CONTCAR-{gas_name.upper()}-optimized-{functional.upper()}', structure)
+    calc.write(path + '/gas/calculator/' + functional + '-calculator.gpw', mode='all')
+    write(path + '/gas/molecules/' + f'CONTCAR-{gas_name.upper()}-optimized-{functional}', structure)
 
 
 def initialize_optimized_gas(gas_name, functional, path):
@@ -86,4 +86,4 @@ def initialize_optimized_gas(gas_name, functional, path):
         gas_molecule = create_gas(gas_name)
         optimize_gas(gas_molecule, functional, path, gas_name)
     
-    return read(path + '/gas/molecules/' + f'CONTCAR-{gas_name.upper()}-optimized-{functional.upper()}', format='vasp')
+    return read(path + '/gas/molecules/' + f'CONTCAR-{gas_name.upper()}-optimized-{functional}', format='vasp')
