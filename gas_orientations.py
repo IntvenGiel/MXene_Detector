@@ -7,10 +7,8 @@ from ase import Atoms, Atom
 
 filenames = ['CONTCAR_co2-optimized-PBE', 'CONTCAR_so2-optimized-PBE', 'CONTCAR_no2-optimized-PBE']
 
-def initial_orientation(filename_gas, cell_size):
+def initial_orientation(gas, cell_size):
     size = cell_size/2
-    gas = read(filename=filename_gas, format='vasp')
-
     for i in range(len(gas)):
         if gas[i].symbol != 'O':
             main = i
@@ -26,7 +24,6 @@ def initial_orientation(filename_gas, cell_size):
         pos_o1 = [-np.sin(bond_angle) * bond_distance_o1 + size, np.cos(bond_angle)*bond_distance_o1 + size, size]
         pos_o2 = [np.sin(bond_angle) * bond_distance_o2 + size, np.cos(bond_angle)*bond_distance_o2 + size, size]
     else:
-        print('yes')
         pos_o1 = [size, size + bond_distance_o1, size]
         pos_o2 = [size, size - bond_distance_o2, size]
     
