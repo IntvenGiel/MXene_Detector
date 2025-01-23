@@ -61,7 +61,7 @@ def optimize_gas(structure, functional, path, gas_name):
     except:
         threshold = 0.01
         ecut_converged = converge_ecut(structure, functional, threshold)
-        k_converged = converge_kpoints(structure, functional, threshold)
+        k_converged = converge_kpoints(structure, functional, threshold, ecut_converged)
 
         calc = GPAW(mode=PW(ecut_converged),
                 kpts=(k_converged,k_converged,1),

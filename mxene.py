@@ -14,10 +14,10 @@ def check_optimized_mxene(name, path, functional):
         pass
     return None
 
-def initialize_mxene_sheet(name, path):
+def initialize_mxene_sheet(name, path, cellsize):
     filename = f'CONTCAR-{name}'
     primitive = read(path + '/mxene/' + filename, format='vasp')
-    mxene = primitive.repeat((3,3,1))
+    mxene = primitive.repeat((cellsize,cellsize,1))
     return mxene
 
 
@@ -27,7 +27,7 @@ def optimize_mxene_sheet(structure, functional, name, path):
     except:
         threshold = 0.01
         ecut_converged = converge_ecut(structure, functional, threshold)
-        k_converged = converge_kpoints(structure, functional, threshold)
+        k_converged = converge_kpoints(structure, functional, threshold, ecut_converged)
 
         calc = GPAW(mode=PW(ecut_converged),
                         kpts=(k_converged,k_converged,1),
@@ -42,9 +42,9 @@ def optimize_mxene_sheet(structure, functional, name, path):
     write(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional}', structure)
 
 
-def initialize_optimized_mxene(mxene_name, functional, path):
+def initialize_optimized_mxene(mxene_name, functional, path, cellsize):
     mxene_opt = check_optimized_mxene()
     if mxene_opt == None:
-        sheet = initialize_mxene_sheet(mxene_name, path)
+        sheet = initialize_mxene_sheet(mxene_name, path, cellsize)
         optimize_mxene_sheet(sheet, functional, mxene_name, path)
     return read(path + '/mxene/molecules/' + f'CONTCAR-{mxene_name}-optimized-{functional}', format='vasp')

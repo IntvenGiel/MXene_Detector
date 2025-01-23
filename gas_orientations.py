@@ -3,10 +3,6 @@ from ase.io import read,write
 from ase.visualize import view
 from ase import Atoms, Atom
 
-
-
-filenames = ['CONTCAR_co2-optimized-PBE', 'CONTCAR_so2-optimized-PBE', 'CONTCAR_no2-optimized-PBE']
-
 def initial_orientation(gas, cell_size):
     size = cell_size/2
     for i in range(len(gas)):

@@ -1,0 +1,27 @@
+from ase.optimize import BFGS
+from gpaw import GPAW, PW, FermiDirac
+from convergence_tests import converge_ecut, converge_kpoints
+from ase.io import read,write
+import os
+
+structname = 'Ti2C.poscar'
+structure = read(filename=structname)
+structure.pbc = True
+
+threshold = 0.01
+functional = 'PBE'
+filename = 'Ti2C-mxene'
+ecut_converged = converge_ecut(structure, functional, threshold)
+k_converged = converge_kpoints(structure, functional, threshold, ecut_converged)
+
+calc = GPAW(mode=PW(ecut_converged),
+        kpts=(k_converged,k_converged,1),
+        xc=functional, 
+        occupations=FermiDirac(0.01), 
+        txt=filename + '-' + functional + '.txt')
+
+structure.calc=calc
+opt=BFGS(structure,trajectory=(filename+'-' + functional + '.traj'))
+opt.run(fmax=0.01)
+calc.write(f'calculator_mxene_{functional}.gpw', mode='all')
+write('CONTCAR_'+ filename + '-' + 'functional', structure)
