@@ -2,6 +2,8 @@ from ase.visualize import view
 from ase.io import read,write
 import numpy as np
 import ase.build
+
+# Should only be ran once, to create correct Ti2C poscar file, is not necessary if poscar file is downloaded from github
 filename = 'Ti2C.poscar'
 
 structure = read(filename=filename)
