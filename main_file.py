@@ -19,12 +19,17 @@ def create_optimized_systems(gas_name, mxene_name, functional, index):
     site = ineq_sites[index]
     unoptimized_systems = place_gas(mxene, gas_molecule, site, gas_cellsize, index, functional, current_dir)
     
-    # for orientation in range(len(unoptimized_systems)):
-    #     system_optimize(gas_molecule, site, orientation, functional, current_dir)
+    for orientation in range(len(unoptimized_systems)):
+        system_optimize(gas_molecule, site, orientation, functional, current_dir)
 
+
+# Deze is CO2, SO2 of NO2, let op hoofdletters
 molecule_name = 'CO2'
+# Deze staat in principe vast
 mxene_name = 'Ti2C'
+# Ik zou hier nu alleen nog PBE gebruiken, voor andere functionalen moeten nieuwe convergence tests gerund worden, 
+# die tests en het optimaliseren van de basis-mxene zijn ingebouwd maar duurt erg lang (ongeveer 4 uur).
 functional = 'PBE'
-for molecule_name in ['CO2', 'NO2', 'SO2']:
-    for site in range(4):
-        create_optimized_systems(molecule_name, mxene_name, functional, site)
+# Dit is de index van de lattice site: 0, 1, 2, 3. De verschillende mogelijke oriëntaties van een molecuul worden automatisch geloopt
+site = 0
+create_optimized_systems(molecule_name, mxene_name, functional, site)
