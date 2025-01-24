@@ -12,11 +12,17 @@ adsorption_distance = 3 #We should look this up in literature, might also be dep
 def main(gas_name, mxene_name, functional, index):
     gas_molecule = initialize_optimized_gas(gas_name, functional, current_dir)
     mxene = initialize_optimized_mxene(mxene_name, functional, current_dir, mxene_supercell_size)
-    inequivalent_sites = inequivalent_sites(mxene, adsorption_distance)
+    # Functions up until this point
     
+    # currently testing:
+    inequivalent_sites = inequivalent_sites(mxene, adsorption_distance)
     site = inequivalent_sites[index]
+    
+    # Untested:
     systems = place_gas(mxene, gas_molecule, site, gas_cellsize)
-
+    #optimized_systems = TODO: optimaliseren van deze systemen
+    # adsorption energies = TODO
+    # pdos = TODO
     pass
 
 
@@ -27,7 +33,6 @@ inequivalent_index = 1
 molecule_name = 'CO2'
 mxene_name = 'Ti2C'
 functional = 'PBE'
+site = 3
 
-main(molecule_name, mxene_name, functional)
-
-
+main(molecule_name, mxene_name, functional, site)

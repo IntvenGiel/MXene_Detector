@@ -8,7 +8,7 @@ import os
 def check_optimized_mxene(name, path, functional):
     """Checks whether an mxene has already been optimized"""
     try:
-        mxene = read(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional}')
+        mxene = read(path + '/mxene' + f'CONTCAR-{name}-optimized-{functional}')
         return mxene
     except:
         pass
@@ -39,7 +39,7 @@ def optimize_mxene_sheet(structure, functional, name, path):
     opt=BFGS(structure,trajectory=(path + '/mxene/trajectories/' + functional +'.traj'))
     opt.run(fmax=0.01)
     calc.write(path + '/mxene/calculator/' + functional + '-calculator.gpw', mode='all')
-    write(path + '/mxene/molecules/' + f'CONTCAR-{name}-optimized-{functional}', structure)
+    write(path + '/mxene' + f'CONTCAR-{name}-optimized-{functional}', structure)
 
 
 def initialize_optimized_mxene(mxene_name, functional, path, cellsize):
@@ -47,4 +47,4 @@ def initialize_optimized_mxene(mxene_name, functional, path, cellsize):
     if mxene_opt == None:
         sheet = initialize_mxene_sheet(mxene_name, path, cellsize)
         optimize_mxene_sheet(sheet, functional, mxene_name, path)
-    return read(path + '/mxene/molecules/' + f'CONTCAR-{mxene_name}-optimized-{functional}', format='vasp')
+    return read(path + '/mxene' + f'CONTCAR-{mxene_name}-optimized-{functional}', format='vasp')
