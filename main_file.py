@@ -8,7 +8,9 @@ from optimize_system import optimized_system as system_optimize
 current_dir = os.path.dirname(os.path.realpath(__file__))
 mxene_supercell_size = 3
 gas_cellsize = 4
-adsorption_distance = 4 #We should look this up in literature, might also be dependent on the gas
+adsorption_distance = 4 
+# A bit higher than https://doi.org/10.1016/j.surfin.2023.102639 and https://doi.org/10.1021/acs.jpcc.7b07921
+# this way the optimization will probably decrease distance to most stable
 
 def create_optimized_systems(gas_name, mxene_name, functional, index):
     gas_molecule = initialize_optimized_gas(gas_name, functional, current_dir)
