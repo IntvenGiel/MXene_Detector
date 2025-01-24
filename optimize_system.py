@@ -8,14 +8,14 @@ import os
 def check_optimized_system(gas, ineq, orient, functional, path):
     """Checks whether an mxene has already been optimized"""
     try:
-        system = read(path + '/system/optimized/' + f'CONTCAR-system-{gas}-{functional}-{ineq}-{orient}')
+        system = read(path + '/system/optimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{orient}')
         return system
     except:
         pass
     return None
 
 def optimize(gas, functional, ineq, orient, path):
-    structure = read(path + '/system/unoptimized/' + f'CONTCAR-system-{gas}-{functional}-{ineq}-{orient}', format='vasp')
+    structure = read(path + '/system/unoptimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{orient}', format='vasp')
     try:
         calc = GPAW(path + '/system/calculator/' + functional + f'-{ineq}-{orient}' + '-calculator.gpw')
     except:
@@ -27,7 +27,7 @@ def optimize(gas, functional, ineq, orient, path):
                         kpts=(k_converged,k_converged,1),
                         xc=functional, 
                         occupations=FermiDirac(0.01), 
-                        txt= path + '/system/calculator/' + functional + f'{gas}-{ineq}-{orient}' + '.txt')
+                        txt= path + '/system/calculator/' + functional + f'{gas.symbols}-{ineq}-{orient}' + '.txt')
     
     structure.calc=calc
     opt=BFGS(structure,trajectory=(path + '/system/trajectories/' + functional +'.traj'))
@@ -39,4 +39,4 @@ def optimized_system(gas, ineq, orient, functional, path):
     system_opt = check_optimized_system(gas, ineq, orient, functional, path)
     if system_opt == None:
         optimize(gas, functional, ineq, orient, path)
-    return read(path + '/system/optimized/' + f'CONTCAR-system-{gas}-{functional}-{ineq}-{orient}', format='vasp')
+    return read(path + '/system/optimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{orient}', format='vasp')

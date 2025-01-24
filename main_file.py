@@ -8,9 +8,10 @@ from optimize_system import optimized_system as system_optimize
 current_dir = os.path.dirname(os.path.realpath(__file__))
 mxene_supercell_size = 3
 gas_cellsize = 4
-adsorption_distance = 4 
+adsorption_distance = 3.5
 # A bit higher than https://doi.org/10.1016/j.surfin.2023.102639 and https://doi.org/10.1021/acs.jpcc.7b07921
 # this way the optimization will probably decrease distance to most stable
+from ase.visualize import view
 
 def create_optimized_systems(gas_name, mxene_name, functional, index):
     gas_molecule = initialize_optimized_gas(gas_name, functional, current_dir)
@@ -20,11 +21,12 @@ def create_optimized_systems(gas_name, mxene_name, functional, index):
     unoptimized_systems = place_gas(mxene, gas_molecule, site, gas_cellsize, index, functional, current_dir)
     
     for orientation in range(len(unoptimized_systems)):
-        system_optimize(gas_molecule, site, orientation, functional, current_dir)
+        view(unoptimized_systems[orientation])
+        system_optimize(gas_molecule, index, orientation, functional, current_dir)
 
 
 # Deze is CO2, SO2 of NO2, let op hoofdletters
-molecule_name = 'CO2'
+molecule_name = 'NO2'
 # Deze staat in principe vast
 mxene_name = 'Ti2C'
 # Ik zou hier nu alleen nog PBE gebruiken, voor andere functionalen moeten nieuwe convergence tests gerund worden, 

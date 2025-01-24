@@ -14,7 +14,7 @@ def build_systems(mxene, gas, position, cell_size, ineq, functional, path):
     for i in range(len(orientations)):
         state = orientations[i]
         gas_state = state.copy()
-        gas_state.positions += np.array([position, position, position]) - cell_size * np.ones((3,3))
+        gas_state.positions += np.array([position, position, position])
         
         system = mxene + gas_state
         write(path + '/system/unoptimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{i}', system)
