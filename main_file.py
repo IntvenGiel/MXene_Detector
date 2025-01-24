@@ -17,7 +17,7 @@ def create_optimized_systems(gas_name, mxene_name, functional, index):
     site = ineq_sites[index]
     unoptimized_systems = place_gas(mxene, gas_molecule, site, gas_cellsize, index, functional, current_dir)
     
-    for orientation in range(len(unoptimized_systems))
+    for orientation in range(len(unoptimized_systems)):
         system_optimize(gas_molecule, site, orientation, functional, current_dir)
 
 molecule_name = 'CO2'
