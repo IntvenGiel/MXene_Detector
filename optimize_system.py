@@ -16,24 +16,30 @@ def check_optimized_system(gas, ineq, orient, functional, path):
 
 def optimize(gas, functional, ineq, orient, path):
     structure = read(path + '/system/unoptimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{orient}', format='vasp')
+    
     try:
-        calc = GPAW(path + '/system/calculator/' + functional + f'-{ineq}-{orient}' + '-calculator.gpw')
+        calc = GPAW(path + '/system/calculator/' + functional + f'{gas.symbols}-{ineq}-{orient}' + '-calculator.gpw')
     except:
-        threshold = 0.01
-        ecut_converged = converge_ecut(structure, functional, threshold)
-        k_converged = converge_kpoints(structure, functional, threshold, ecut_converged)
+        if functional == 'PBE':
+            ecut_converged = 1150
+            k_converged = 7
+        else:
+            threshold = 0.01
+            ecut_converged = converge_ecut(structure, functional, threshold)
+            k_converged = converge_kpoints(structure, functional, threshold, ecut_converged)
 
         calc = GPAW(mode=PW(ecut_converged),
                         kpts=(k_converged,k_converged,1),
                         xc=functional, 
                         occupations=FermiDirac(0.01), 
-                        txt= path + '/system/calculator/' + functional + f'{gas.symbols}-{ineq}-{orient}' + '.txt')
+                        txt= path + '/system/calculator/' + f'{gas.symbols}-{functional}-{ineq}-{orient}' + '.txt')
     
     structure.calc=calc
-    opt=BFGS(structure,trajectory=(path + '/system/trajectories/' + functional +'.traj'))
+    print('top')
+    opt=BFGS(structure,trajectory=(path + '/system/trajectories/' + f'{gas.symbols}-{functional}-{ineq}-{orient}'+'.traj'))
     opt.run(fmax=0.01)
-    calc.write(path + '/system/calculator/' + functional + f'-{ineq}-{orient}' + '-calculator.gpw', mode='all')
-    write(path + '/system/optimized/' + f'CONTCAR-system-{functional}-{ineq}-{orient}', structure)
+    calc.write(path + '/system/calculator/' + functional + f'{gas.symbols}-{ineq}-{orient}' + '-calculator.gpw', mode='all')
+    write(path + '/system/optimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{orient}', structure)
 
 def optimized_system(gas, ineq, orient, functional, path):
     system_opt = check_optimized_system(gas, ineq, orient, functional, path)
