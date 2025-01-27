@@ -2,7 +2,7 @@ from gas_orientations import initial_orientation, symmetric_orientations, asymme
 import numpy as np
 from ase.io import write
 
-def build_systems(mxene, gas, position, cell_size, ineq, functional, path):
+def build_systems(mxene, gas, position, cell_size, ineq, functional, path, cellsize):
     systems = []
     gas = initial_orientation(gas, cell_size)
     if 'C' in gas.symbols:
@@ -17,6 +17,6 @@ def build_systems(mxene, gas, position, cell_size, ineq, functional, path):
         gas_state.positions += np.array([position, position, position])
         
         system = mxene + gas_state
-        write(path + '/system/unoptimized/' + f'CONTCAR-system-{gas.symbols}-{functional}-{ineq}-{i}', system)
+        write(path + '/system/unoptimized/' + f'CONTCAR-system-{cellsize}-{gas.symbols}-{functional}-{ineq}-{i}', system)
         systems.append(system)
     return systems

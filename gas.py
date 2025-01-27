@@ -53,7 +53,7 @@ def optimize_gas(structure, functional, path, gas_name):
     """
     structure.set_cell([10,10,10])
     structure.center()
-    structure.pbc = True
+    structure.pbc = False
 
     # Either reads out calculator or creates one and runs convergence tests
     try:

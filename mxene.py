@@ -5,10 +5,10 @@ from gpaw import GPAW, PW, FermiDirac
 from convergence_tests import converge_ecut, converge_kpoints
 import os
 
-def check_optimized_mxene(name, path, functional):
+def check_optimized_mxene(name, path, functional, cellsize):
     """Checks whether an mxene has already been optimized"""
     try:
-        mxene = read(path + '/mxene/' + f'CONTCAR-{name}-optimized-{functional}')
+        mxene = read(path + '/mxene/' + f'CONTCAR-{name}-{cellsize}-optimized-{functional}')
         return mxene
     except:
         pass
@@ -21,7 +21,7 @@ def initialize_mxene_sheet(name, path, cellsize):
     return mxene
 
 
-def optimize_mxene_sheet(structure, functional, name, path):
+def optimize_mxene_sheet(structure, functional, name, path, cellsize):
     try:
         calc = GPAW(path + '/mxene/calculator/' + functional + '-calculator.gpw')
     except:
@@ -39,12 +39,12 @@ def optimize_mxene_sheet(structure, functional, name, path):
     opt=BFGS(structure,trajectory=(path + '/mxene/trajectories/' + functional +'.traj'))
     opt.run(fmax=0.01)
     calc.write(path + '/mxene/calculator/' + functional + '-calculator.gpw', mode='all')
-    write(path + '/mxene/' + f'CONTCAR-{name}-optimized-{functional}', structure)
+    write(path + '/mxene/' + f'CONTCAR-{name}-{cellsize}-optimized-{functional}', structure)
 
 
 def initialize_optimized_mxene(mxene_name, functional, path, cellsize):
-    mxene_opt = check_optimized_mxene(mxene_name, path, functional)
+    mxene_opt = check_optimized_mxene(mxene_name, path, functional, cellsize)
     if mxene_opt == None:
         sheet = initialize_mxene_sheet(mxene_name, path, cellsize)
-        optimize_mxene_sheet(sheet, functional, mxene_name, path)
-    return read(path + '/mxene/' + f'CONTCAR-{mxene_name}-optimized-{functional}', format='vasp')
+        optimize_mxene_sheet(sheet, functional, mxene_name, path, cellsize)
+    return read(path + '/mxene/' + f'CONTCAR-{mxene_name}-{cellsize}-optimized-{functional}', format='vasp')
