@@ -1,0 +1,212 @@
+
+  ___ ___ ___ _ _ _  
+ |   |   |_  | | | | 
+ | | | | | . | | | | 
+ |__ |  _|___|_____|  24.6.0
+ |___|_|             
+
+User:   intvengiel@LAPTOP-1QL89KE1
+Date:   Wed Jan 29 22:03:02 2025
+Arch:   x86_64
+Pid:    34753
+CWD:    /home/intvengiel/computerlab/project/temporary
+Python: 3.10.16
+gpaw:   /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.10/site-packages/gpaw
+_gpaw:  /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.10/site-packages/
+        _gpaw.cpython-310-x86_64-linux-gnu.so
+ase:    /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.10/site-packages/ase (version 3.23.0)
+numpy:  /home/intvengiel/.local/lib/python3.10/site-packages/numpy (version 1.26.4)
+scipy:  /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.10/site-packages/scipy (version 1.15.1)
+libxc:  6.2.2
+units:  Angstrom and eV
+cores: 1
+OpenMP: True
+OMP_NUM_THREADS: 1
+
+Input parameters:
+  kpts: [8 8 6]
+  mode: {ecut: 600.0,
+         name: pw}
+  occupations: {fixmagmom: False,
+                name: fermi-dirac,
+                width: 0.01}
+  setups: {Ti: :d,0.0}
+  xc: PBE
+
+System changes: positions, numbers, cell, pbc, initial_charges, initial_magmoms 
+
+Initialize ...
+
+species:
+  Ti:
+    name: Titanium
+    id: d282db07e62ae71292040bf25b25ccdd
+    Z: 22.0
+    valence: 12
+    core: 10
+    charge: 0.0
+    Hubbard: {U: 0.0,  # eV
+              l: 2,
+              scale: True}
+    file: /home/intvengiel/miniconda3/envs/gpaw-env/share/gpaw/Ti.PBE.gz
+    compensation charges: {type: gauss,
+                           rc: 0.38,
+                           lmax: 2}
+    cutoffs: {filter: 2.23,
+              core: 1.02}
+    projectors:
+      #              energy  rcut
+      - 3s(2.00)   -62.623   1.270
+      - 4s(2.00)    -4.466   1.270
+      - 3p(6.00)   -38.862   1.058
+      - 4p(0.00)    -1.466   1.058
+      - 3d(2.00)    -4.258   1.058
+      -  d          22.953   1.058
+  
+    # Using partial waves for Ti as LCAO basis
+
+Reference energy: -46448.028563  # eV
+
+Spin-paired calculation
+
+Convergence criteria:
+ Maximum [total energy] change in last 3 cyles: 0.0005 eV / valence electron
+ Maximum integral of absolute [dens]ity change: 0.0001 electrons / valence electron
+ Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+ Maximum number of scf [iter]ations: 333
+ (Square brackets indicate name in SCF output, whereas a 'c' in
+ the SCF output indicates the quantity has converged.)
+
+Symmetries present (total): 12
+
+  ( 1  1  0)  ( 1  1  0)  ( 1  0  0)  ( 1  0  0)  ( 0  1  0)  ( 0  1  0)
+  ( 0 -1  0)  ( 0 -1  0)  ( 0  1  0)  ( 0  1  0)  (-1 -1  0)  (-1 -1  0)
+  ( 0  0  1)  ( 0  0 -1)  ( 0  0  1)  ( 0  0 -1)  ( 0  0  1)  ( 0  0 -1)
+
+  ( 0 -1  0)  ( 0 -1  0)  (-1  0  0)  (-1  0  0)  (-1 -1  0)  (-1 -1  0)
+  (-1  0  0)  (-1  0  0)  ( 1  1  0)  ( 1  1  0)  ( 1  0  0)  ( 1  0  0)
+  ( 0  0  1)  ( 0  0 -1)  ( 0  0  1)  ( 0  0 -1)  ( 0  0  1)  ( 0  0 -1)
+Note: your k-points are not as symmetric as your crystal!
+
+384 k-points: 8 x 8 x 6 Monkhorst-Pack grid
+60 k-points in the irreducible part of the Brillouin zone
+       k-points in crystal coordinates                weights
+   0:     0.06250000   -0.06250000    0.08333333          4/384
+   1:     0.06250000   -0.06250000    0.25000000          4/384
+   2:     0.06250000   -0.06250000    0.41666667          4/384
+   3:     0.06250000    0.06250000    0.08333333          4/384
+   4:     0.06250000    0.06250000    0.25000000          4/384
+   5:     0.06250000    0.06250000    0.41666667          4/384
+   6:     0.18750000   -0.18750000    0.08333333          4/384
+   7:     0.18750000   -0.18750000    0.25000000          4/384
+   8:     0.18750000   -0.18750000    0.41666667          4/384
+   9:     0.18750000   -0.06250000    0.08333333          8/384
+          ...
+  59:     0.43750000    0.43750000    0.41666667          4/384
+
+Wave functions: Plane wave expansion
+  Cutoff energy: 600.000 eV
+  Number of coefficients (min, max): 1155, 1188
+  Pulay-stress correction: 0.000000 eV/Ang^3 (de/decut=0.000000)
+  Using FFTW library
+  ScaLapack parameters: grid=1x1, blocksize=None
+  Wavefunction extrapolation:
+    Improved wavefunction reuse through dual PAW basis 
+
+Occupation numbers: Fermi-Dirac:
+  width: 0.0100  # eV
+ 
+
+Eigensolver
+   Davidson(niter=2) 
+
+Densities:
+  Coarse grid: 18*18*27 grid
+  Fine grid: 36*36*54 grid
+  Total Charge: 0.000000 
+
+Density mixing:
+  Method: separate
+  Backend: pulay
+  Linear mixing parameter: 0.05
+  old densities: 5
+  Damping of long wavelength oscillations: 50 
+
+Hamiltonian:
+  XC and Coulomb potentials evaluated on a 36*36*54 grid
+  Using the PBE Exchange-Correlation functional
+  External potential:
+    NoExternalPotential
+ 
+
+XC parameters: PBE with 2 nearest neighbor stencil
+
+Memory estimate:
+  Process memory now: 147.69 MiB
+  Calculator: 36.09 MiB
+    Density: 3.65 MiB
+      Arrays: 1.74 MiB
+      Localized functions: 1.25 MiB
+      Mixer: 0.67 MiB
+    Hamiltonian: 1.16 MiB
+      Arrays: 1.13 MiB
+      XC: 0.00 MiB
+      Poisson: 0.00 MiB
+      vbar: 0.03 MiB
+    Wavefunctions: 31.28 MiB
+      Arrays psit_nG: 20.67 MiB
+      Eigensolver: 0.49 MiB
+      Projections: 0.63 MiB
+      Projectors: 8.08 MiB
+      PW-descriptor: 1.42 MiB
+
+Total number of cores used: 1
+
+Number of atoms: 2
+Number of atomic orbitals: 26
+Number of bands in calculation: 19
+Number of valence electrons: 24
+Bands to converge: occupied
+
+... initialized
+
+Initializing position-dependent things.
+
+Density initialized from atomic densities
+Creating initial wave functions:
+  19 bands from LCAO basis set
+
+                  
+                  
+                  
+                  
+         Ti       
+                  
+                  
+                  
+       Ti         
+                  
+                  
+                  
+                  
+
+Positions:
+   0 Ti     0.000000    0.000000    0.000000    ( 0.0000,  0.0000,  0.0000)
+   1 Ti     0.000000    1.703183    2.340000    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    yes    2.950000    0.000000    0.000000    18     0.1419
+  2. axis:    yes   -1.475000    2.554775    0.000000    18     0.1419
+  3. axis:    yes    0.000000    0.000000    4.680000    27     0.1733
+
+  Lengths:   2.950000   2.950000   4.680000
+  Angles:   90.000000  90.000000 120.000000
+
+Effective grid spacing dv^(1/3) = 0.1592
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 22:03:36   -13.810100
+iter:   2 22:03:59   -13.720205   -1.54  -1.34
+iter:   3 22:04:16   -14.235139   +0.13  -1.36

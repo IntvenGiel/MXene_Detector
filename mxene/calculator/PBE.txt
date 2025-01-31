@@ -1,0 +1,245 @@
+
+  ___ ___ ___ _ _ _  
+ |   |   |_  | | | | 
+ | | | | | . | | | | 
+ |__ |  _|___|_____|  24.6.0
+ |___|_|             
+
+User:   intvengiel@DESKTOP-CUQAD65
+Date:   Fri Jan 24 21:17:19 2025
+Arch:   x86_64
+Pid:    654636
+CWD:    /home/intvengiel/workshop-physics
+Python: 3.12.8
+gpaw:   /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.12/site-packages/gpaw
+_gpaw:  /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.12/site-packages/
+        _gpaw.cpython-312-x86_64-linux-gnu.so
+ase:    /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.12/site-packages/ase (version 3.24.0)
+numpy:  /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.12/site-packages/numpy (version 1.26.4)
+scipy:  /home/intvengiel/miniconda3/envs/gpaw-env/lib/python3.12/site-packages/scipy (version 1.15.1)
+libxc:  6.2.2
+units:  Angstrom and eV
+cores: 1
+OpenMP: True
+OMP_NUM_THREADS: 1
+
+Input parameters:
+  kpts: [7 7 1]
+  mode: {ecut: 1150.0,
+         name: pw}
+  occupations: {fixmagmom: False,
+                name: fermi-dirac,
+                width: 0.01}
+  xc: PBE
+
+System changes: positions, numbers, cell, pbc, initial_charges, initial_magmoms 
+
+Initialize ...
+
+species:
+  Ti:
+    name: Titanium
+    id: d282db07e62ae71292040bf25b25ccdd
+    Z: 22.0
+    valence: 12
+    core: 10
+    charge: 0.0
+    file: /home/intvengiel/miniconda3/envs/gpaw-env/share/gpaw/Ti.PBE.gz
+    compensation charges: {type: gauss,
+                           rc: 0.38,
+                           lmax: 2}
+    cutoffs: {filter: 2.23,
+              core: 1.02}
+    projectors:
+      #              energy  rcut
+      - 3s(2.00)   -62.623   1.270
+      - 4s(2.00)    -4.466   1.270
+      - 3p(6.00)   -38.862   1.058
+      - 4p(0.00)    -1.466   1.058
+      - 3d(2.00)    -4.258   1.058
+      -  d          22.953   1.058
+  
+    # Using partial waves for Ti as LCAO basis
+
+  C:
+    name: Carbon
+    id: 4aa54d4b901d75f77cc0ea3eec22967b
+    Z: 6.0
+    valence: 4
+    core: 2
+    charge: 0.0
+    file: /home/intvengiel/miniconda3/envs/gpaw-env/share/gpaw/C.PBE.gz
+    compensation charges: {type: gauss,
+                           rc: 0.20,
+                           lmax: 2}
+    cutoffs: {filter: 1.14,
+              core: 1.14}
+    projectors:
+      #              energy  rcut
+      - 2s(2.00)   -13.751   0.635
+      - 2p(2.00)    -5.284   0.635
+      -  s          13.461   0.635
+      -  p          21.927   0.635
+      -  d           0.000   0.635
+  
+    # Using partial waves for C as LCAO basis
+
+  O:
+    name: Oxygen
+    id: 32ecd46bf208036f09c70b0ec9a88b78
+    Z: 8.0
+    valence: 6
+    core: 2
+    charge: 0.0
+    file: /home/intvengiel/miniconda3/envs/gpaw-env/share/gpaw/O.PBE.gz
+    compensation charges: {type: gauss,
+                           rc: 0.21,
+                           lmax: 2}
+    cutoffs: {filter: 1.17,
+              core: 0.83}
+    projectors:
+      #              energy  rcut
+      - 2s(2.00)   -23.961   0.688
+      - 2p(4.00)    -9.029   0.598
+      -  s           3.251   0.688
+      -  p          18.182   0.598
+      -  d           0.000   0.619
+  
+    # Using partial waves for O as LCAO basis
+
+Reference energy: -432390.242827  # eV
+
+Spin-paired calculation
+
+Convergence criteria:
+ Maximum [total energy] change in last 3 cyles: 0.0005 eV / valence electron
+ Maximum integral of absolute [dens]ity change: 0.0001 electrons / valence electron
+ Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+ Maximum number of scf [iter]ations: 333
+ (Square brackets indicate name in SCF output, whereas a 'c' in
+ the SCF output indicates the quantity has converged.)
+
+Symmetries present (total): 1
+
+  ( 1  0  0)
+  ( 0  1  0)
+  ( 0  0  1)
+
+49 k-points: 7 x 7 x 1 Monkhorst-Pack grid
+25 k-points in the irreducible part of the Brillouin zone
+       k-points in crystal coordinates                weights
+   0:     0.00000000    0.00000000    0.00000000          1/49
+   1:     0.00000000    0.14285714    0.00000000          2/49
+   2:     0.00000000    0.28571429    0.00000000          2/49
+   3:     0.00000000    0.42857143    0.00000000          2/49
+   4:     0.14285714   -0.42857143    0.00000000          2/49
+   5:     0.14285714   -0.28571429    0.00000000          2/49
+   6:     0.14285714   -0.14285714    0.00000000          2/49
+   7:     0.14285714    0.00000000    0.00000000          2/49
+   8:     0.14285714    0.14285714    0.00000000          2/49
+   9:     0.14285714    0.28571429    0.00000000          2/49
+          ...
+  24:     0.42857143    0.42857143    0.00000000          2/49
+
+Wave functions: Plane wave expansion
+  Cutoff energy: 1150.000 eV
+  Number of coefficients (min, max): 31518, 31579
+  Pulay-stress correction: 0.000000 eV/Ang^3 (de/decut=0.000000)
+  Using FFTW library
+  ScaLapack parameters: grid=1x1, blocksize=None
+  Wavefunction extrapolation:
+    Improved wavefunction reuse through dual PAW basis 
+
+Occupation numbers: Fermi-Dirac:
+  width: 0.0100  # eV
+ 
+
+Eigensolver
+   Davidson(niter=2) 
+
+Densities:
+  Coarse grid: 75*75*40 grid
+  Fine grid: 150*150*80 grid
+  Total Charge: 0.000000 
+
+Density mixing:
+  Method: separate
+  Backend: pulay
+  Linear mixing parameter: 0.05
+  old densities: 5
+  Damping of long wavelength oscillations: 50 
+
+Hamiltonian:
+  XC and Coulomb potentials evaluated on a 150*150*80 grid
+  Using the PBE Exchange-Correlation functional
+  External potential:
+    NoExternalPotential
+ 
+
+XC parameters: PBE with 2 nearest neighbor stencil
+
+Memory estimate:
+  Process memory now: 394.91 MiB
+  Calculator: 2417.80 MiB
+    Density: 112.19 MiB
+      Arrays: 44.63 MiB
+      Localized functions: 50.39 MiB
+      Mixer: 17.17 MiB
+    Hamiltonian: 30.54 MiB
+      Arrays: 29.18 MiB
+      XC: 0.00 MiB
+      Poisson: 0.00 MiB
+      vbar: 1.36 MiB
+    Wavefunctions: 2275.07 MiB
+      Arrays psit_nG: 1987.66 MiB
+      Eigensolver: 86.07 MiB
+      Projections: 30.21 MiB
+      Projectors: 150.49 MiB
+      PW-descriptor: 20.63 MiB
+
+Total number of cores used: 1
+
+Number of atoms: 30
+Number of atomic orbitals: 282
+Number of bands in calculation: 165
+Number of valence electrons: 268
+Bands to converge: occupied
+
+... initialized
+
+Initializing position-dependent things.
+
+Density initialized from atomic densities
+Timing:                              incl.     excl.
+-----------------------------------------------------------
+Hamiltonian:                         1.229     0.003   0.0% |
+ Atomic:                             0.410     0.001   0.0% |
+  XC Correction:                     0.408     0.408   0.5% |
+ Calculate atomic Hamiltonians:      0.452     0.452   0.5% |
+ Communicate:                        0.000     0.000   0.0% |
+ Initialize Hamiltonian:             0.001     0.001   0.0% |
+ Poisson:                            0.004     0.004   0.0% |
+ XC 3D grid:                         0.358     0.358   0.4% |
+LCAO initialization:                82.872     0.128   0.1% |
+ LCAO eigensolver:                  12.272     0.004   0.0% |
+  Calculate projections:             0.047     0.047   0.1% |
+  DenseAtomicCorrection:             0.085     0.085   0.1% |
+  Distribute overlap matrix:         0.008     0.008   0.0% |
+  Orbital Layouts:                   0.535     0.535   0.6% |
+  Potential matrix:                 11.097    11.097  12.5% |----|
+  Sum over cells:                    0.495     0.495   0.6% |
+ LCAO to grid:                      65.601    65.601  73.7% |----------------------------|
+ Set positions (LCAO WFS):           4.870     1.445   1.6% ||
+  Basic WFS set positions:           0.000     0.000   0.0% |
+  Basis functions set positions:     0.000     0.000   0.0% |
+  P tci:                             2.893     2.893   3.3% ||
+  ST tci:                            0.519     0.519   0.6% |
+  mktci:                             0.014     0.014   0.0% |
+PWDescriptor:                        0.337     0.337   0.4% |
+Set symmetry:                        0.001     0.001   0.0% |
+Other:                               4.558     4.558   5.1% |-|
+-----------------------------------------------------------
+Total:                                        88.997 100.0%
+
+Memory usage: 2.19 GiB
+Date: Fri Jan 24 21:18:48 2025
