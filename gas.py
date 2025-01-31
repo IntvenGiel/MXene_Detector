@@ -53,7 +53,7 @@ def optimize_gas(structure, functional, path, gas_name):
     """
     structure.set_cell([10,10,10])
     structure.center()
-    structure.pbc = True
+    structure.pbc = False
 
     # Either reads out calculator or creates one and runs convergence tests
     try:
@@ -61,13 +61,16 @@ def optimize_gas(structure, functional, path, gas_name):
     except:
         threshold = 0.01
         ecut_converged = converge_ecut(structure, functional, threshold)
-        k_converged = converge_kpoints(structure, functional, threshold, ecut_converged)
-
-        calc = GPAW(mode=PW(ecut_converged),
-                kpts=(k_converged,k_converged,1),
-                xc=functional, 
-                occupations=FermiDirac(0.01), 
-                txt= path + '/gas/calculator/' + functional + '.txt')
+        if functional == 'PBEU':
+            calc = GPAW(mode=PW(ecut_converged),
+                    xc='PBE', 
+                    occupations=FermiDirac(0.01), 
+                    txt= path + '/gas/calculator/' + functional + '.txt')
+        else:
+            calc = GPAW(mode=PW(ecut_converged),
+                    xc=functional, 
+                    occupations=FermiDirac(0.01), 
+                    txt= path + '/gas/calculator/' + functional + '.txt')
          
     structure.calc=calc
     opt=BFGS(structure,trajectory=(path + '/gas/trajectories/' + functional +'.traj'))

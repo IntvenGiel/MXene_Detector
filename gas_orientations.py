@@ -16,16 +16,18 @@ def initial_orientation(gas, cell_size):
     bond_distance_o2 = gas.get_distance(main, o2)
     bond_angle = (gas.get_angle(o1, main, o2) / 180 * np.pi) % np.pi
 
-    if bond_angle > 0.01:
+    if gas[main].symbol == 'C':
+        pos_o1 = np.array([-np.sin(bond_angle) * bond_distance_o1, np.cos(bond_angle)*bond_distance_o1, 0])
+        pos_o2 = -1 * pos_o1.copy()
+        pos_o1 += np.array([size, size, size])
+        pos_o2 += np.array([size, size, size])
+
+    else:
         pos_o1 = [-np.sin(bond_angle) * bond_distance_o1 + size, np.cos(bond_angle)*bond_distance_o1 + size, size]
         pos_o2 = [np.sin(bond_angle) * bond_distance_o2 + size, np.cos(bond_angle)*bond_distance_o2 + size, size]
-    else:
-        pos_o1 = [size, size + bond_distance_o1, size]
-        pos_o2 = [size, size - bond_distance_o2, size]
     
     molecule += Atom('O', position=pos_o2)
     molecule += Atom('O', position=pos_o1)
-
     return molecule
 
 

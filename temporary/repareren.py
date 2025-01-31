@@ -4,13 +4,11 @@ import numpy as np
 import ase.build
 
 # Should only be ran once, to create correct Ti2C poscar file, is not necessary if poscar file is downloaded from github
-filename = 'Ti2C.poscar'
+filename = 'CONTCAR-Ti2C'
 
 structure = read(filename=filename)
-
-new_structure = ase.build.cut(structure, a=[1, 0, 0], b = [0, 1, 0], c = [0, 0, 1/3])
-
+params = structure.get_cell_lengths_and_angles()
+a, b = params[:2]
+structure.set_cell([a,b,10])
 view(structure)
-view(new_structure)
-
-write('Ti2C_2.poscar', new_structure)
+write('CONTCAR-Ti2C', structure)
